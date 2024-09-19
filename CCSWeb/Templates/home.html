@@ -1,0 +1,39 @@
+{% extends 'base.html'%}
+{% block title %}
+  Home Page (Search)
+{% endblock %}
+{% block content  %}
+
+        <form action="/result" method="post">
+        <h4>搜尋 </h4>
+
+            {% if error_message %}
+                <div class="error_message">{{error_message}}</div>
+            <br>
+            {% endif %}
+
+        <div class="form-group mb-3">
+           <input type="text" class="form-control"
+                  placeholder="輸入字串"
+                  name="search_string"
+                  id="search_string"
+           >
+         </div>
+            <br>
+
+        <h4>搜尋範圍</h4>
+        {% for book in books %}
+        <div class="form-group form-check mb-3">
+          <input type="checkbox"
+                 class="form-check-input"
+                 name="books"
+                 id={{book.id}}
+                 value={{book.id}}>
+          <label class="form-check-label" for={{book.id}}>{{[book.title, "  ( " ,book.type," )"]|join}}</label>
+         </div>
+        {%endfor%}
+        <br>
+        <button type="submit" class="btn btn-primary mb-3">提交</button>
+      </form>
+
+{% endblock %}
